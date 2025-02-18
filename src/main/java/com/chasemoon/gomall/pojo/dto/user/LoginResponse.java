@@ -1,5 +1,8 @@
 package com.chasemoon.gomall.pojo.dto.user;
 
+import lombok.Data;
+
+@Data
 public class LoginResponse {
-    private int userId;
+    private String token;
 }

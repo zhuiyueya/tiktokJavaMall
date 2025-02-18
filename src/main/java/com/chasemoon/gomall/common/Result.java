@@ -7,6 +7,16 @@ public class Result <T>{
     private int code;
     private String msg;
     private T data;
+
+    public Result(int code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
+    public Result() {
+    }
+
     public static <T> Result<T>success(T data){
         Result<T>result =new Result<>();
         result.setCode(200);
