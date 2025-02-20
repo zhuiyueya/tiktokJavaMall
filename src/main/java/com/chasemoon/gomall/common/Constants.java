@@ -12,4 +12,6 @@ public interface Constants {
 
     //无效Token常量
     public static final String INVALID_TOKEN = "Invalid Token";
+
+    public static final String LIST_PRODUCTS_FAILED="list所有商品失败";
 }

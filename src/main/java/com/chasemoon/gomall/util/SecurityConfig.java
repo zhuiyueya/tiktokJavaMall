@@ -30,7 +30,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())//关闭csrf
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/login", "/user/register").permitAll()//对外公开的接口
+                        .requestMatchers("/user/login", "/user/register","/product/list").permitAll()//对外公开的接口
                         .anyRequest().authenticated()
                 )//其他接口需要验证
 

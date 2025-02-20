@@ -1,12 +1,25 @@
 package com.chasemoon.gomall.pojo.entity;
 
+import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.List;
 
+@Entity
+@Data
+@Table(name="products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    @Column(name="product_name")
+    private String productName;
+    @Column
     private float price;
+    @Column
     private String description;
+    @Column
     private String picture;
-    private List<String> categories;
+    //@Column
+    //private List<String> categories;
 }
