@@ -1,4 +1,7 @@
 package com.chasemoon.gomall.repository.jpa;
 
-public interface OrderRepository {
+import com.chasemoon.gomall.pojo.entity.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }
