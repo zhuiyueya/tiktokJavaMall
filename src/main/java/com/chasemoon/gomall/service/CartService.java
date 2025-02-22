@@ -4,6 +4,7 @@ import com.chasemoon.gomall.pojo.dto.cart.*;
 import com.chasemoon.gomall.pojo.entity.Cart;
 import com.chasemoon.gomall.pojo.entity.CartItem;
 import com.chasemoon.gomall.repository.jpa.CartRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +48,12 @@ public class CartService {
 
         return new GetCartResponse(cartRepository.findByUserId(getCartRequest.getUserId()));
     }
+    @Transactional//有写入/删除操作时需要加上这个注解，确保方法在事务中执行，为什么这个函数去掉此注解也能正常运行？save函数自带事务
     public EmptyCartResponse emptyCart(EmptyCartRequest emptyCartRequest) {
+        //cartRepository.deleteByUserId(emptyCartRequest.getUserId());
+        Cart cart=cartRepository.findByUserId(emptyCartRequest.getUserId());
+        cart.getItems().clear();
+        cartRepository.save(cart);
         return null;
     }
 }

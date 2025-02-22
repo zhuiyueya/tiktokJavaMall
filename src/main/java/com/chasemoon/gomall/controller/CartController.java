@@ -1,10 +1,7 @@
 package com.chasemoon.gomall.controller;
 
 import com.chasemoon.gomall.common.Result;
-import com.chasemoon.gomall.pojo.dto.cart.AddItemRequest;
-import com.chasemoon.gomall.pojo.dto.cart.AddItemResponse;
-import com.chasemoon.gomall.pojo.dto.cart.GetCartRequest;
-import com.chasemoon.gomall.pojo.dto.cart.GetCartResponse;
+import com.chasemoon.gomall.pojo.dto.cart.*;
 import com.chasemoon.gomall.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -32,6 +29,13 @@ public class CartController {
         GetCartRequest getCartRequest = new GetCartRequest();
         getCartRequest.setUserId(Integer.parseInt(authentication.getPrincipal().toString()));
         return Result.success(cartService.getCart(getCartRequest));
+    }
+
+    @PostMapping("/empty")
+    public Result<EmptyCartResponse>emptyCart(Authentication authentication) {
+        EmptyCartRequest emptyCartRequest = new EmptyCartRequest();
+        emptyCartRequest.setUserId(Integer.parseInt(authentication.getPrincipal().toString()));
+        return Result.success(cartService.emptyCart(emptyCartRequest));
     }
 
 }
