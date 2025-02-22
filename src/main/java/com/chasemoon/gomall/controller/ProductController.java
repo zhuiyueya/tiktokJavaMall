@@ -1,10 +1,7 @@
 package com.chasemoon.gomall.controller;
 
 import com.chasemoon.gomall.common.Result;
-import com.chasemoon.gomall.pojo.dto.product.ListProductsRequest;
-import com.chasemoon.gomall.pojo.dto.product.ListProductsResponse;
-import com.chasemoon.gomall.pojo.dto.product.SearchProductRequest;
-import com.chasemoon.gomall.pojo.dto.product.SearchProductRespnse;
+import com.chasemoon.gomall.pojo.dto.product.*;
 import com.chasemoon.gomall.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +21,12 @@ public class ProductController {
     public Result<SearchProductRespnse> searchProducts(@RequestBody SearchProductRequest searchProductRequest) {
         log.info("post serach {}", searchProductRequest);
         return Result.success(productService.SearchProduct(searchProductRequest));
+    }
+    @GetMapping("/get/{$productId}")
+    public Result<GetProductResponse> getProduct(@PathVariable("$productId")String productId) {
+        GetProductRequest getProductRequest = new GetProductRequest();
+        getProductRequest.setProductId(Integer.parseInt(productId));
+        return Result.success(productService.getProduct(getProductRequest));
     }
     
 }

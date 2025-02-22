@@ -23,7 +23,10 @@ public class ProductService {
     private SearchProductRepository searchProductRepository;
 
     public GetProductResponse getProduct(GetProductRequest request) {
-        return null;
+        GetProductResponse response = new GetProductResponse();
+        Product product=productRepository.findByProductId(request.getProductId());
+        response.setProduct(product);
+        return response;
     }
     public ListProductsResponse ListProducts(ListProductsRequest request) {
         ListProductsResponse response = new ListProductsResponse();
