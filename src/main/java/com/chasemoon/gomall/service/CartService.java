@@ -43,7 +43,9 @@ public class CartService {
         return new AddItemResponse(addItemRequest.getProductId(), addItemRequest.getQuantity());
     }
     public GetCartResponse getCart(GetCartRequest getCartRequest) {
-        return null;
+
+
+        return new GetCartResponse(cartRepository.findByUserId(getCartRequest.getUserId()));
     }
     public EmptyCartResponse emptyCart(EmptyCartRequest emptyCartRequest) {
         return null;
