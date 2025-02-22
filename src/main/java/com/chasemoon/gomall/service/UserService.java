@@ -5,14 +5,11 @@ import com.chasemoon.gomall.pojo.dto.user.LoginResponse;
 import com.chasemoon.gomall.pojo.dto.user.RegisterRequest;
 import com.chasemoon.gomall.pojo.dto.user.RegisterResponse;
 import com.chasemoon.gomall.pojo.entity.User;
-import com.chasemoon.gomall.repository.UserRepository;
+import com.chasemoon.gomall.repository.jpa.UserRepository;
 import com.chasemoon.gomall.util.JwtUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service

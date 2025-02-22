@@ -11,5 +11,21 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  elasticsearch:
+    uris: http://localhost:9200
+    connection-timeout: 3s
+    username: elastic
+    password: 0cluQbTIY0T1RkVDkoFn
 
+  data:
+    jpa:
+      repositories:
+        base-package: com.chasemoon.gomall.repository.jpa
+    elasticsearch:
+      repositories:
+        base-package: com.chasemoon.gomall.repository.es
+    main:
+      allow-bean-definition-overriding: false # 生产环境必须关闭
+    jpa.repositories.enabled: true
+    elasticsearch.repositories.enabled: true
 

@@ -3,8 +3,7 @@ package com.chasemoon.gomall.service;
 import com.chasemoon.gomall.pojo.dto.cart.*;
 import com.chasemoon.gomall.pojo.entity.Cart;
 import com.chasemoon.gomall.pojo.entity.CartItem;
-import com.chasemoon.gomall.repository.CartRepository;
-import io.jsonwebtoken.ExpiredJwtException;
+import com.chasemoon.gomall.repository.jpa.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

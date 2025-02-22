@@ -31,7 +31,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token=request.getHeader(Constants.REQUEST_HEADER_AUTHORIZATION);
         log.info("token:"+token);
 
-
         if(token!=null && token.startsWith(Constants.TOKEN_PREFIX_BEARER)) {
             log.info("token bearer existed!");
             //去掉“Bearer "前缀
