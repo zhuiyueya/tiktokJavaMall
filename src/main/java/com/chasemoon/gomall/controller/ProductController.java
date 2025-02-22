@@ -28,5 +28,10 @@ public class ProductController {
         getProductRequest.setProductId(Integer.parseInt(productId));
         return Result.success(productService.getProduct(getProductRequest));
     }
+
+    @PostMapping("/add")
+    public Result<AddProductResponse> addProduct(@RequestBody AddProductRequest addProductRequest) {
+        return Result.success(productService.addProduct(addProductRequest));
+    }
     
 }
