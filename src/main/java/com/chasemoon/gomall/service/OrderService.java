@@ -31,10 +31,15 @@ public class OrderService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public PlaceOrderResponse placeOrder(PlaceOrderRequest placeOrderRequest,int userId) {
+    @Autowired
+    private AlipayService alipayService;
+
+    public PlaceOrderResponse placeOrder(PlaceOrderRequest placeOrderRequest) {
+        int userId = placeOrderRequest.getUserId();
         Order order = new Order();
         //获取设置order必要的信息
         Date currentDate = new Date();
+
         List<CartItem> items=cartRepository.findByUserId(userId).getItems();
         List<OrderItem>orderItems=new ArrayList<OrderItem>();
         for(CartItem cartItem:items){
@@ -57,6 +62,9 @@ public class OrderService {
         order.setAddress(orderAddress);
 
         order.setOrderStatus(Order.OrderStatus.PENDING_PAYMENT);
+
+        order.setTotalCost(placeOrderRequest.getTotalCost());
+
 
         //将购物车清空
         cartService.emptyCart(new EmptyCartRequest(userId));
@@ -102,5 +110,25 @@ public class OrderService {
         ListOrderResponse listOrderResponse=new ListOrderResponse();
         listOrderResponse.setOrders(orders);
         return listOrderResponse;
+    }
+
+    /*
+     * @Description: 根据订单ID修改订单状态
+     * @param
+     * @return: void
+     * @Author:  34362
+     * @date:  2025/2/23 21:31
+     */
+
+    public void updateOrderStatus(String orderId, Order.OrderStatus orderStatus) {
+        Order order=orderRepository.getOrderByOrderId(orderId);
+        order.setOrderStatus(orderStatus);
+        orderRepository.save(order);
+
+    }
+
+    public GetOrderStatusResponse getOrderStatus(GetOrderStatusRequest getOrderStatusRequest) {
+        Order order=orderRepository.getOrderByOrderId(getOrderStatusRequest.getOrderId());
+        return new GetOrderStatusResponse(order.getOrderStatus());
     }
 }

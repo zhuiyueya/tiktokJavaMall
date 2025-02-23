@@ -28,6 +28,8 @@ public class Order {
     @Column
     private Date created_at;
     @Column
+    private float totalCost;
+    @Column
     private OrderStatus orderStatus;
 
     public enum OrderStatus {
