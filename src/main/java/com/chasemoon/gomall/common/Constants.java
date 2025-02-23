@@ -14,4 +14,6 @@ public interface Constants {
     public static final String INVALID_TOKEN = "Invalid Token";
 
     public static final String LIST_PRODUCTS_FAILED="list所有商品失败";
+
+    public static final String MARK_ORDER_PAIED_FAILED="将订单标记为已支付失败：订单号错误/用户不存在/订单号非该用户所持有";
 }

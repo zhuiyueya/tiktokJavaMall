@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> getAllByEmail(String email);
+
+    Order getOrderByOrderId(String orderId);
 }

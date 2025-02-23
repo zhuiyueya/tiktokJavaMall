@@ -1,9 +1,11 @@
 package com.chasemoon.gomall.service;
 
+import com.chasemoon.gomall.common.Constants;
 import com.chasemoon.gomall.pojo.dto.cart.EmptyCartRequest;
 import com.chasemoon.gomall.pojo.dto.order.*;
 import com.chasemoon.gomall.pojo.entity.*;
 import com.chasemoon.gomall.repository.jpa.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class OrderService {
     @Autowired
@@ -73,7 +76,22 @@ public class OrderService {
         return orderItem;
     }
     //标记订单为已支付
-    public MarkOrderPaidResponse markOrderPaid(MarkOrderPaidRequest markOrderPaidRequest, int userId) {
+    public MarkOrderPaidResponse markOrderPaid(MarkOrderPaidRequest markOrderPaidRequest) {
+        log.info("markOrderPaidRequest:{}",markOrderPaidRequest);
+
+        User user=userRepository.getUsersByUserId(markOrderPaidRequest.getUserId());
+        Order order=orderRepository.getOrderByOrderId(markOrderPaidRequest.getOrderId());
+        try {
+
+            if (user != null && order != null && user.getEmail().equals(order.getEmail())) {
+                order.setOrderStatus(Order.OrderStatus.PAID);
+                orderRepository.save(order);
+            } else {
+                throw new RuntimeException(Constants.MARK_ORDER_PAIED_FAILED);
+            }
+        }catch(Exception e){
+            throw new RuntimeException("markOrderPaidFail:"+e.getMessage());
+        }
         return null;
     }
     public ListOrderResponse listOrder(ListOrderRequest listOrderRequest) {

@@ -17,10 +17,11 @@ public class OrderController {
         int userId=Integer.parseInt(authentication.getPrincipal().toString());
         return Result.success(orderService.placeOrder(placeOrderRequest,userId));
     }
-    @PostMapping("markPaied")
+    @PostMapping("markPaid")
     public Result<MarkOrderPaidResponse>markOrderPaid(Authentication authentication,@RequestBody MarkOrderPaidRequest markOrderPaidRequest) {
         int userId=Integer.parseInt(authentication.getPrincipal().toString());
-        return Result.success(orderService.markOrderPaid(markOrderPaidRequest,userId));
+        markOrderPaidRequest.setUserId(userId);
+        return Result.success(orderService.markOrderPaid(markOrderPaidRequest));
 
     }
     @GetMapping("/list")
