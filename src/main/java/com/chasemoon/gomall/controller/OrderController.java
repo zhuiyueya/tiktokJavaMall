@@ -5,10 +5,7 @@ import com.chasemoon.gomall.pojo.dto.order.*;
 import com.chasemoon.gomall.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/order")
@@ -20,10 +17,19 @@ public class OrderController {
         int userId=Integer.parseInt(authentication.getPrincipal().toString());
         return Result.success(orderService.placeOrder(placeOrderRequest,userId));
     }
-    public Result<MarkOrderPaidResponse>markOrderPaid(MarkOrderPaidRequest markOrderPaidRequest) {
-        return null;
+    @PostMapping("markPaied")
+    public Result<MarkOrderPaidResponse>markOrderPaid(Authentication authentication,@RequestBody MarkOrderPaidRequest markOrderPaidRequest) {
+        int userId=Integer.parseInt(authentication.getPrincipal().toString());
+        return Result.success(orderService.markOrderPaid(markOrderPaidRequest,userId));
+
     }
-    public Result<ListOrderResponse>listOrder(ListOrderRequest listOrderRequest) {
-        return null;
+    @GetMapping("/list")
+    public Result<ListOrderResponse>listOrder(Authentication authentication) {
+        ListOrderRequest listOrderRequest=new ListOrderRequest();
+        listOrderRequest.setUserId(Integer.parseInt(authentication.getPrincipal().toString()));
+        return Result.success(orderService.listOrder(listOrderRequest));
+
     }
+
+
 }

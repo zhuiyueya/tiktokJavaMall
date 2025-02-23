@@ -53,6 +53,8 @@ public class OrderService {
 
         order.setAddress(orderAddress);
 
+        order.setOrderStatus(Order.OrderStatus.PENDING_PAYMENT);
+
         //将购物车清空
         cartService.emptyCart(new EmptyCartRequest(userId));
         orderRepository.save(order);
@@ -70,10 +72,15 @@ public class OrderService {
         orderItem.setCost(productRepository.getProductByProductId(cartItem.getProductId()).getPrice());
         return orderItem;
     }
-    public MarkOrderPaidResponse markOrderPaid(MarkOrderPaidRequest markOrderPaidRequest) {
+    //标记订单为已支付
+    public MarkOrderPaidResponse markOrderPaid(MarkOrderPaidRequest markOrderPaidRequest, int userId) {
         return null;
     }
     public ListOrderResponse listOrder(ListOrderRequest listOrderRequest) {
-        return null;
+        User user=userRepository.getUsersByUserId(listOrderRequest.getUserId());
+        List<Order>orders=orderRepository.getAllByEmail(user.getEmail());
+        ListOrderResponse listOrderResponse=new ListOrderResponse();
+        listOrderResponse.setOrders(orders);
+        return listOrderResponse;
     }
 }
