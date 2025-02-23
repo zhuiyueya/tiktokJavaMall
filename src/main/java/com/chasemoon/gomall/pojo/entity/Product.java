@@ -20,6 +20,8 @@ public class Product {
     private String description;
     @Column
     private String picture;
+    @Column
+    private int stock;
     //@Column
     //private List<String> categories;
 }

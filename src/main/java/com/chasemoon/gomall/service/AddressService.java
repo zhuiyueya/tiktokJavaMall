@@ -8,6 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author: chasemoon
  * @CreateTime: 2025-02-22
@@ -26,5 +29,10 @@ public class AddressService {
         AddressResponse addressResponse = new AddressResponse();
         BeanUtils.copyProperties(address, addressResponse);
         return addressResponse;
+    }
+
+    public List<Address> getAllAddressByUserId(int userId) {
+        List<Address>addresses= addressRepository.getAllByUserId(userId);
+        return addresses;
     }
 }

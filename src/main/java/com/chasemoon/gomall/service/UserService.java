@@ -56,5 +56,14 @@ public class UserService {
         return registerResponse;
     }
 
+    public String getUserNameByUserId(int userId) {
+        User user=userRepository.getUsersByUserId(userId);
+        return user.getUserName();
+    }
+
+    public String getEmialByUserId(int userId) {
+        User user=userRepository.getUsersByUserId(userId);
+        return user.getEmail();
+    }
 }
 
