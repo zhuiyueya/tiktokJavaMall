@@ -36,6 +36,7 @@ public class CartService {
             cartItem.setCart(cart);
             cartItem.setQuantity(addItemRequest.getQuantity());
             cartItem.setProductId(addItemRequest.getProductId());
+            //cartItem.setPicture(addItemRequest);
 
             //将商品添加到对应的购物车
             cart.getItems().add(cartItem);

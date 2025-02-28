@@ -20,5 +20,6 @@ public class CartItem {
     @JoinColumn(name="cart_id")
     @JsonBackReference//标记为从端，不进行序列化，即搜索时不再对应的另一张表
     private Cart cart;
+    
 
 }
